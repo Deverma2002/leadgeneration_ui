@@ -3,61 +3,75 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Mitraya AI — Real Estate Intelligence</title>
-<meta name="description" content="Get instant, AI-powered property valuations and locality insights across top Indian cities." />
+<title>Mitraya LLM — Property Mitra | Free AI Property Intelligence</title>
+<meta name="description" content="Get instant AI-powered property valuations across every major Indian city. Register now and claim 1,00,000 free Claude + Gemini tokens for property analysis." />
 
-<!-- Fonts mapped to your CSS specifications -->
+<!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,500&display=swap" rel="stylesheet" />
 
 <style>
 /* ============================================================
-   Mitraya AI — locality & valuation intelligence
-   Palette : navy ink ground, warm stone paper, brand blue (AI)
-             + gold (valuation) as two purposeful accents
-   Type    : Newsreader (display) + IBM Plex Sans (body)
-             + IBM Plex Mono (data / figures)
+   Mitraya LLM — "Property Mitra"
+   ------------------------------------------------------------
+   DESIGN PLAN
+   Subject   : an AI reading land-transaction records to price
+               Indian property — closer to a surveyor's instrument
+               than a generic SaaS dashboard.
+   Palette   : pine-ink ground (not navy), aged-parchment paper,
+               signal teal (the "AI reads the data" accent),
+               survey gold (valuation/currency), claim-red (urgency)
+   Type      : Newsreader (display serif, editorial/trustworthy)
+               + IBM Plex Sans (body) + IBM Plex Mono (data figures)
+   Signature : topographic contour rings behind the valuation
+               figure + a rotated "surveyor's stamp" badge —
+               literalizes "we survey the data" instead of a
+               generic gradient blob or numbered-step layout.
    ============================================================ */
 
 :root{
-  --ink:        #0B1220;
-  --ink-2:      #121B2E;
-  --ink-line:   #253148;
-  --paper:      #F5F2EA;
-  --paper-2:    #EAE4D4;
-  --blue:       #3B6FE0;
-  --blue-deep:  #2748A8;
-  --blue-soft:  #DCE6FB;
-  --gold:       #C79A3D;
-  --gold-deep:  #9C7826;
-  --gold-soft:  #F4E7C8;
-  --slate:      #5B6472;
-  --slate-d:    #97A2B8;
+  --ink:        #10201C;   /* pine-black ground, not navy   */
+  --ink-2:      #172B25;
+  --ink-line:   #25423A;
+  --paper:      #F3EEE1;   /* aged parchment                */
+  --paper-2:    #E5DCC4;
+  --paper-line: #D8CDAE;
+  --teal:       #1B8272;   /* signal accent — AI reads data */
+  --teal-deep:  #125F53;
+  --teal-soft:  #DCEEEA;
+  --gold:       #B8862E;   /* survey gold — valuation/value */
+  --gold-deep:  #8E661F;
+  --gold-soft:  #F0E2C2;
+  --claim:      #C1441E;   /* claim-red — urgency/offer     */
+  --claim-deep: #9C3517;
+  --claim-soft: #F7E1D6;
+  --slate:      #5C6660;
+  --slate-d:    #9AA69E;
   --white:      #FFFFFF;
-  --rust:       #C24A3A;
+  --rust:       #B33B2C;
 
-  --maxw: 1140px;
-  --pad: clamp(20px, 5vw, 56px);
-  --r: 16px;
-  --r-lg: 22px;
+  --maxw: 1280px;
+  --pad: clamp(18px, 3.6vw, 44px);
+  --r: 12px;
+  --r-lg: 18px;
 
-  --shadow: 0 18px 50px -18px rgba(8,14,28,.35);
-  --shadow-card: 0 24px 60px -22px rgba(8,14,28,.5);
+  --shadow: 0 14px 36px -18px rgba(16,32,28,.4);
+  --shadow-card: 0 22px 56px -20px rgba(16,32,28,.55);
 
   --ease: cubic-bezier(.22,.61,.36,1);
 }
 
 /* ── RESET ───────────────────────────────────────────────── */
 *{ box-sizing:border-box; margin:0; padding:0; }
-html{ scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
+html,body{ height:100%; }
 body{
   font-family:'IBM Plex Sans',system-ui,sans-serif;
   background:var(--paper);
   color:var(--ink);
-  line-height:1.6;
+  line-height:1.5;
   -webkit-font-smoothing:antialiased;
-  overflow-x:hidden;
+  overflow:hidden; /* single viewport — no page scroll on desktop */
 }
 a{ color:inherit; text-decoration:none; }
 ul,ol{ list-style:none; }
@@ -66,270 +80,365 @@ button{ font:inherit; }
 
 .wrap{ width:100%; max-width:var(--maxw); margin-inline:auto; padding-inline:var(--pad); }
 
-/* ── TYPE PRIMITIVES ─────────────────────────────────────── */
-.eyebrow{
-  display:inline-block;
-  font-size:.74rem; font-weight:600; letter-spacing:.16em;
-  text-transform:uppercase; color:var(--blue-deep);
-  margin-bottom:18px;
+/* ── APP SHELL ───────────────────────────────────────────── */
+.app{
+  height:100vh; height:100dvh;
+  display:flex; flex-direction:column;
+  background:
+    radial-gradient(1200px 600px at 100% 0%, rgba(27,130,114,.06), transparent 60%),
+    var(--paper);
 }
-.eyebrow.light{ color:var(--blue-soft); }
 
-.sec-h{
-  font-family:'Newsreader',serif;
-  font-weight:600;
-  font-size:clamp(1.7rem, 3.4vw, 2.65rem);
-  line-height:1.14;
-  letter-spacing:-.01em;
+/* ── TOP BAR ─────────────────────────────────────────────── */
+.topbar{
+  flex:0 0 auto;
+  border-bottom:1px solid var(--paper-line);
+  background:var(--paper);
+  z-index:50;
 }
+.topbar-in{ display:flex; align-items:center; justify-content:space-between; height:60px; gap:16px; }
+.brand{ display:inline-flex; align-items:center; gap:10px; font-weight:700; }
+.brand-mark{
+  width:34px; height:34px; border-radius:8px; flex:0 0 auto;
+  background:var(--ink);
+  display:grid; place-items:center;
+  position:relative;
+}
+.brand-mark svg{ width:19px; height:19px; display:block; }
+.brand-stack{ display:flex; flex-direction:column; line-height:1.08; }
+.brand-word{ font-family:'Newsreader',serif; font-size:1.22rem; letter-spacing:-.01em; }
+.brand-word .dim{ color:var(--slate); font-weight:500; }
+.brand-tag{
+  font-family:'IBM Plex Mono',monospace; font-size:.6rem; font-weight:500;
+  letter-spacing:.12em; color:var(--teal-deep);
+}
+.topbar-offer{
+  display:flex; align-items:center; gap:9px;
+  font-family:'IBM Plex Mono',monospace; font-size:.74rem; font-weight:600;
+  color:var(--claim-deep); background:var(--claim-soft);
+  padding:7px 13px; border-radius:8px;
+  border:1px solid rgba(193,68,30,.22);
+  white-space:nowrap;
+}
+.live-dot{ width:6px; height:6px; border-radius:50%; background:var(--claim); animation:pulse 1.6s infinite; flex:0 0 auto; }
+@keyframes pulse{ 0%,100%{ opacity:1 } 50%{ opacity:.3 } }
+
+/* ── MAIN STAGE ──────────────────────────────────────────── */
+.stage{ flex:1 1 auto; min-height:0; display:flex; align-items:stretch; }
+.stage-grid{
+  width:100%; max-width:var(--maxw); margin-inline:auto; padding-inline:var(--pad);
+  display:grid; grid-template-columns:1.05fr .95fr; gap:clamp(24px,3.4vw,56px);
+  align-items:center; min-height:0;
+}
+
+/* ── LEFT: PITCH ─────────────────────────────────────────── */
+.pitch{ min-width:0; }
+
+.offer-pill{
+  display:inline-flex; align-items:center; gap:10px;
+  background:var(--ink); color:var(--gold-soft);
+  padding:7px 15px 7px 7px; border-radius:9px;
+  font-size:.76rem; font-weight:600; margin-bottom:18px;
+  box-shadow:0 8px 20px -10px rgba(16,32,28,.55);
+}
+.offer-pill .tag{
+  background:var(--claim); color:#fff; font-family:'IBM Plex Mono',monospace;
+  font-weight:700; font-size:.68rem; padding:3px 8px; border-radius:5px;
+  letter-spacing:.04em;
+}
+
+.hero-h{
+  font-family:'Newsreader',serif; font-weight:600;
+  font-size:clamp(1.7rem, 2.85vw, 2.8rem);
+  line-height:1.09; letter-spacing:-.02em;
+  margin-bottom:14px;
+}
+.survey-underline{ position:relative; white-space:nowrap; color:var(--teal-deep); font-style:italic; }
+.survey-underline::after{
+  content:""; position:absolute; left:-.05em; right:-.05em; bottom:.05em; height:.36em;
+  background:var(--gold-soft); z-index:-1; border-radius:2px;
+}
+
+.hero-sub{
+  font-size:clamp(.9rem,1.05vw,1rem); color:var(--slate);
+  max-width:44em; margin-bottom:16px;
+}
+.hero-sub strong{ color:var(--ink); }
+.hero-sub .model-name{ font-family:'IBM Plex Mono',monospace; font-size:.92em; font-weight:600; color:var(--teal-deep); }
+
+.coverage{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:16px; }
+.coverage span{
+  font-size:.72rem; font-weight:600; color:var(--teal-deep);
+  background:var(--teal-soft); padding:5px 10px; border-radius:6px;
+  font-family:'IBM Plex Mono',monospace;
+}
+.coverage span.more{ color:var(--slate); background:var(--paper-2); }
+
+.hero-trust{ display:flex; flex-wrap:wrap; gap:11px 18px; margin-bottom:16px; }
+.hero-trust li{ display:flex; align-items:center; gap:7px; font-size:.82rem; color:var(--slate); font-weight:500; }
+.tick{
+  display:inline-grid; place-items:center;
+  width:17px; height:17px; flex:0 0 17px;
+  border-radius:50%; background:var(--teal-soft); color:var(--teal-deep);
+  font-size:.6rem; font-weight:700;
+}
+
+/* ── TOKEN OFFER CARD — signature element ───────────────────
+   Topographic contour rings + rotated survey stamp, echoing a
+   surveyor's official mark on a land document.                */
+.token-card{
+  position:relative; overflow:hidden;
+  display:flex; align-items:center; gap:16px;
+  background:var(--ink); color:var(--paper);
+  border-radius:var(--r); padding:16px 18px;
+  box-shadow:var(--shadow); border:1px solid var(--ink-line);
+}
+.contour-rings{
+  position:absolute; right:-40px; top:50%; transform:translateY(-50%);
+  width:180px; height:180px; pointer-events:none; opacity:.5;
+}
+.contour-rings svg{ width:100%; height:100%; }
+.stamp{
+  flex:0 0 auto; width:54px; height:54px; border-radius:50%;
+  border:2px solid var(--gold);
+  display:grid; place-items:center;
+  transform:rotate(-8deg);
+  position:relative; z-index:1;
+  background:rgba(184,134,46,.08);
+}
+.stamp::before{
+  content:""; position:absolute; inset:4px; border-radius:50%;
+  border:1px dashed rgba(184,134,46,.55);
+}
+.stamp-txt{
+  font-family:'IBM Plex Mono',monospace; font-weight:700; font-size:.58rem;
+  color:var(--gold); text-align:center; line-height:1.2; letter-spacing:.02em;
+}
+.token-copy{ position:relative; z-index:1; min-width:0; }
+.token-copy .num{
+  font-family:'IBM Plex Mono',monospace; font-weight:700; font-size:1.05rem; color:var(--gold);
+  display:block; margin-bottom:2px; line-height:1.35;
+}
+.token-copy .num .models{ color:var(--teal-soft); font-size:.92em; }
+.token-copy p{ font-size:.8rem; color:var(--slate-d); line-height:1.45; }
+.token-copy p strong{ color:var(--paper); }
+.form-title-sub .models, .hero-sub .model-name{ font-weight:600; }
+
+/* ── RIGHT: FORM CARD ────────────────────────────────────── */
+.form-card{
+  background:var(--white); color:var(--ink);
+  border-radius:var(--r-lg);
+  box-shadow:var(--shadow-card);
+  border:1px solid var(--paper-line);
+  padding:clamp(18px,2.4vw,26px);
+  display:flex; flex-direction:column;
+  max-height:min(660px, 84vh);
+  position:relative;
+}
+
+.timer-band{
+  display:flex; align-items:center; justify-content:space-between; gap:10px;
+  background:var(--claim-soft); border:1px solid rgba(193,68,30,.22);
+  border-radius:9px; padding:9px 13px; margin-bottom:16px;
+}
+.timer-band-l{ display:flex; align-items:center; gap:8px; font-size:.76rem; font-weight:600; color:var(--claim-deep); }
+.timer-clock{
+  font-family:'IBM Plex Mono',monospace; font-weight:700; font-size:.94rem;
+  color:var(--claim-deep); background:#fff; padding:4px 10px; border-radius:6px;
+  letter-spacing:.02em; min-width:56px; text-align:center;
+}
+
+.form-title{ font-family:'Newsreader',serif; font-size:1.28rem; font-weight:600; margin-bottom:3px; }
+.form-title-sub{ font-size:.82rem; color:var(--slate); margin-bottom:16px; }
+.form-title-sub .models{ color:var(--teal-deep); font-weight:600; }
+
+.field{ margin-bottom:11px; }
+.field label{ display:block; font-size:.76rem; font-weight:600; margin-bottom:5px; color:var(--ink); }
+.field input{
+  width:100%; font:inherit; font-size:.9rem; color:var(--ink);
+  background:var(--paper); border:1.5px solid var(--paper-line);
+  border-radius:8px; padding:10px 12px; transition:border-color .15s, box-shadow .15s;
+}
+.field input::placeholder{ color:#a9ad9f; }
+.field input:focus{ outline:none; border-color:var(--teal); box-shadow:0 0 0 3px rgba(27,130,114,.14); background:#fff; }
+.field input.invalid{ border-color:var(--rust); }
+.err{ display:none; color:var(--rust); font-size:.74rem; margin-top:4px; font-weight:500; }
+.err.show{ display:block; }
+.form-fine{ font-size:.7rem; color:var(--slate); text-align:center; margin-top:10px; line-height:1.5; }
 
 /* ── BUTTONS ─────────────────────────────────────────────── */
 .btn{
   display:inline-flex; align-items:center; justify-content:center; gap:8px;
-  font-family:'IBM Plex Sans',sans-serif; font-weight:600; font-size:.98rem;
-  padding:13px 22px; border-radius:999px; border:0; cursor:pointer;
-  transition:transform .18s var(--ease), box-shadow .18s var(--ease), background .18s var(--ease);
+  font-family:'IBM Plex Sans',sans-serif; font-weight:700; font-size:.92rem;
+  padding:12px 20px; border-radius:9px; border:0; cursor:pointer;
+  transition:transform .16s var(--ease), box-shadow .16s var(--ease), background .16s var(--ease);
 }
-.btn-solid{ background:var(--blue); color:#fff; box-shadow:0 10px 24px -10px rgba(59,111,224,.6); }
-.btn-solid:hover{ background:var(--blue-deep); transform:translateY(-2px); box-shadow:0 16px 30px -12px rgba(59,111,224,.65); }
-.btn-ghost{ background:transparent; color:var(--ink); border:1.5px solid var(--ink-line); }
-.btn-ghost:hover{ border-color:var(--ink); transform:translateY(-2px); }
-.btn-lg{ padding:16px 28px; font-size:1.02rem; }
+.btn-solid{ background:var(--claim); color:#fff; box-shadow:0 10px 22px -10px rgba(193,68,30,.55); }
+.btn-solid:hover{ background:var(--claim-deep); transform:translateY(-2px); box-shadow:0 14px 26px -10px rgba(193,68,30,.6); }
 .btn-block{ width:100%; }
 .btn:disabled{ opacity:.45; cursor:not-allowed; transform:none; box-shadow:none; }
 
-/* ── TOP BAR ─────────────────────────────────────────────── */
-.topbar{
-  position:sticky; top:0; z-index:50;
-  background:rgba(245,242,234,.85);
-  backdrop-filter:blur(12px);
-  border-bottom:1px solid transparent;
-}
-.topbar-in{ display:flex; align-items:center; justify-content:space-between; height:66px; }
-.brand{ display:inline-flex; align-items:center; gap:9px; font-weight:700; }
-.brand-stack{ display:flex; flex-direction:column; line-height:1.05; }
-.brand-word{ font-family:'Newsreader',serif; font-size:1.4rem; letter-spacing:-.01em; }
-.brand-dim{ color:var(--blue); font-weight:600; }
-.brand-tag{
-  font-family:'IBM Plex Mono',monospace; font-size:.65rem; font-weight:500;
-  letter-spacing:.14em; text-transform:uppercase; color:var(--slate);
-  margin-top:2px;
-}
-
-/* ── HERO ────────────────────────────────────────────────── */
-.hero{ position:relative; padding-top:clamp(40px,6vw,76px); padding-bottom:clamp(36px,5vw,64px); }
-.hero-grid{
-  display:grid; grid-template-columns:1.12fr .88fr; gap:clamp(28px,5vw,64px);
-  align-items:center;
-}
-.hero-h{
-  font-family:'Newsreader',serif; font-weight:600;
-  font-size:clamp(2.2rem, 5vw, 3.7rem);
-  line-height:1.08; letter-spacing:-.02em;
-  margin-bottom:22px;
-}
-.ink-underline{ position:relative; white-space:nowrap; color:var(--blue-deep); font-style:italic; }
-.ink-underline::after{
-  content:""; position:absolute; left:0; right:0; bottom:.08em; height:.4em;
-  background:var(--gold-soft); z-index:-1; border-radius:3px;
-  transform:skew(-12deg);
-}
-.hero-sub{
-  font-size:clamp(1.02rem,1.5vw,1.16rem); color:var(--slate);
-  max-width:36em; margin-bottom:28px;
-}
-.hero-cta{ display:flex; flex-wrap:wrap; gap:14px; margin-bottom:26px; }
-.tick{
-  display:inline-grid; place-items:center;
-  width:20px; height:20px; flex:0 0 20px;
-  border-radius:50%; background:var(--blue-soft); color:var(--blue-deep);
-  font-size:.7rem; font-weight:700;
-}
-.hero-trust{ display:flex; flex-wrap:wrap; gap:18px 26px; }
-.hero-trust li{ display:flex; align-items:center; gap:8px; font-size:.92rem; color:var(--slate); font-weight:500; }
-
-/* ── LIVE VALUATION CARD (Visual element from CSS) ───────── */
-.valcard{
-  background:var(--ink); color:var(--paper);
-  border-radius:var(--r-lg); padding:26px;
-  box-shadow:var(--shadow-card); border:1px solid var(--ink-line);
-  position:relative; overflow:hidden;
-}
-.valcard-head{ display:flex; align-items:center; justify-content:space-between; margin-bottom:18px; }
-.valcard-head-l{ font-size:.76rem; letter-spacing:.12em; text-transform:uppercase; color:var(--slate-d); font-weight:600; display:flex; align-items:center; gap:9px;}
-.pulse-dot{ width:8px; height:8px; border-radius:50%; background:var(--blue); animation:pulse 2.2s infinite; }
-@keyframes pulse{ 0%,100%{ opacity:1 } 50%{ opacity:.4 } }
-.valcard-live{ font-family:'IBM Plex Mono',monospace; font-size:.7rem; color:var(--blue-soft); background:rgba(59,111,224,.16); padding:4px 9px; border-radius:999px; }
-.valcard-locality{ font-family:'Newsreader',serif; font-size:1.4rem; font-weight:600; margin-bottom:2px; }
-.valcard-sub{ font-size:.82rem; color:var(--slate-d); margin-bottom:20px; }
-.valcard-price{ display:flex; align-items:baseline; gap:10px; margin-bottom:6px; }
-.valcard-price-num{ font-family:'IBM Plex Mono',monospace; font-size:2.4rem; font-weight:600; color:var(--gold); }
-.valcard-price-unit{ font-size:.85rem; color:var(--slate-d); }
-.valcard-foot{
-  margin-top:18px; padding-top:16px; border-top:1px solid var(--ink-line);
-  font-size:.82rem; color:var(--slate-d);
-}
-
-/* ── FORM SECTION ────────────────────────────────────────── */
-.getstarted{ background:var(--ink); color:var(--paper); padding-block:clamp(54px,7vw,96px); }
-.form-grid{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(30px,5vw,64px); align-items:center; }
-.form-pitch .eyebrow { color: var(--blue-soft); }
-.form-pitch .sec-h { color: var(--paper); }
-.form-sub{ color:var(--slate-d); margin-top:18px; font-size:1.02rem; max-width:38ch; margin-bottom:26px;}
-
-.form-card{
-  background:var(--paper); color:var(--ink);
-  border-radius:var(--r-lg); padding:clamp(24px,3vw,36px);
-  box-shadow:var(--shadow-card);
-}
-.form-title{ font-family:'Newsreader',serif; font-size:1.4rem; font-weight:600; margin-bottom:22px; }
-
-.field{ margin-bottom:16px; }
-.field label{ display:block; font-size:.86rem; font-weight:600; margin-bottom:7px; color:var(--ink); }
-.field input{
-  width:100%; font:inherit; font-size:.98rem; color:var(--ink);
-  background:var(--white); border:1.5px solid var(--paper-2);
-  border-radius:11px; padding:12px 14px; transition:border-color .15s, box-shadow .15s;
-}
-.field input:focus{ outline:none; border-color:var(--blue); box-shadow:0 0 0 3px rgba(59,111,224,.18); }
-.field input.invalid{ border-color:var(--rust); }
-.err{ display:none; color:var(--rust); font-size:.82rem; margin-top:6px; font-weight:500; }
-.err.show{ display:block; }
-.form-fine{ font-size:.8rem; color:var(--slate); text-align:center; margin-top:14px; }
-
-/* ── STATES (OTP, DUPE, SUCCESS) ─────────────────────────── */
-.form-state{ text-align:center; padding:18px 6px 8px; }
+/* ── STATES (OTP, DUPE) ──────────────────────────────────── */
+.form-state{ text-align:center; padding:8px 4px 4px; }
 .state-ico{
-  width:58px; height:58px; border-radius:50%; margin:0 auto 18px;
-  display:grid; place-items:center; font-size:1.7rem; font-weight:700;
+  width:48px; height:48px; border-radius:50%; margin:0 auto 14px;
+  display:grid; place-items:center; font-size:1.3rem; font-weight:700;
 }
-.success .state-ico { background:var(--blue-soft); color:var(--blue-deep); }
-.dupe .state-ico { background:#FEE2E2; color:var(--rust); }
-.form-state h3{ font-family:'Newsreader',serif; font-size:1.42rem; font-weight:600; margin-bottom:10px; }
-.form-state p{ color:var(--slate); font-size:.95rem; margin-bottom: 20px;}
-.otp-input{ letter-spacing:.4rem !important; text-align:center; font-family:'IBM Plex Mono',monospace; font-size:1.4rem !important; }
+.success .state-ico{ background:var(--teal-soft); color:var(--teal-deep); }
+.dupe .state-ico{ background:#F7DFDB; color:var(--rust); }
+.form-state h3{ font-family:'Newsreader',serif; font-size:1.2rem; font-weight:600; margin-bottom:8px; }
+.form-state p{ color:var(--slate); font-size:.86rem; margin-bottom:16px; }
+.otp-input{ letter-spacing:.4rem !important; text-align:center; font-family:'IBM Plex Mono',monospace; font-size:1.25rem !important; }
 
-/* Responsive */
+/* ── RESPONSIVE ──────────────────────────────────────────── */
 @media (max-width:900px){
-  .hero-grid, .form-grid{ grid-template-columns:1fr; gap:34px; }
+  body{ overflow-y:auto; overflow-x:hidden; }
+  .app{ height:auto; min-height:100vh; min-height:100dvh; }
+  .stage-grid{ grid-template-columns:1fr; padding-block:18px; }
+  .form-card{ max-height:none; }
+  .coverage{ display:none; }
+  .contour-rings{ display:none; }
+}
+@media (max-width:520px){
+  .topbar-offer span.offer-label{ display:none; }
+}
+
+@media (prefers-reduced-motion:reduce){
+  *{ animation:none !important; transition:none !important; }
 }
 </style>
 </head>
 <body>
 
-<header class="topbar">
-  <div class="wrap topbar-in">
-    <a href="/" class="brand">
-      <span class="brand-stack">
-        <span class="brand-word">Mitraya<span class="brand-dim">&nbsp;AI</span></span>
-        <span class="brand-tag">Real Estate Intelligence</span>
-      </span>
-    </a>
-    <a href="https://app.mitrayallm.com/" class="btn btn-sm btn-ghost">Login</a>
-  </div>
-</header>
+<div class="app">
 
-<main>
-  <!-- ── HERO SECTION ───────────────────────────────────── -->
-  <section class="hero">
-    <div class="wrap hero-grid">
-      <div class="hero-copy">
-        <span class="eyebrow">Smart Property Insights</span>
-        <h1 class="hero-h">
-          Stop guessing what a locality is worth.
-          <span class="ink-underline">Ask Mitraya.</span>
-        </h1>
-        <p class="hero-sub">
-          Get instant, AI-powered property valuations, locality price trends, and project insights across top Indian cities in seconds.
-        </p>
-        <div class="hero-cta">
-          <a href="#register" class="btn btn-solid btn-lg">Get Free Access</a>
-        </div>
-        <ul class="hero-trust">
-          <li><span class="tick">✓</span> Instant AI Valuations</li>
-          <li><span class="tick">✓</span> Real Market Data</li>
-          <li><span class="tick">✓</span> 100% Free Trial</li>
-        </ul>
+  <header class="topbar">
+    <div class="wrap topbar-in">
+      <a href="/" class="brand">
+        <span class="brand-mark">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2L21 20H3L12 2Z" fill="#F3EEE1"/>
+            <path d="M12 2L16.5 20H7.5L12 2Z" fill="#1B8272"/>
+          </svg>
+        </span>
+        <span class="brand-stack">
+          <span class="brand-word">Mitraya <span class="dim">LLM</span></span>
+          <span class="brand-tag">PROPERTY MITRA</span>
+        </span>
+      </a>
+      <div class="topbar-offer">
+        <span class="live-dot"></span>
+        <span class="offer-label">1,00,000 free Claude + Gemini tokens for new signups</span>
       </div>
-
-      <!-- Live Valuation Mockup Card (Using exact CSS provided) -->
-      <aside class="valcard">
-        <div class="valcard-head">
-          <div class="valcard-head-l"><div class="pulse-dot"></div> Live AI Output</div>
-          <div class="valcard-live">Mitraya Model v2.1</div>
-        </div>
-        <div class="valcard-locality">Whitefield, Bengaluru</div>
-        <div class="valcard-sub">Analyzing 1,240 recent transactions...</div>
-        <div class="valcard-price">
-          <div class="valcard-price-num">₹11,450</div>
-          <div class="valcard-price-unit">/ sq.ft avg</div>
-        </div>
-        <div class="valcard-foot">
-          <strong>+8.4%</strong> expected appreciation in next 12 months based on upcoming Metro Phase 2B.
-        </div>
-      </aside>
     </div>
-  </section>
+  </header>
 
-  <!-- ── REGISTRATION FORM SECTION ──────────────────────── -->
-  <section id="register" class="getstarted">
-    <div class="wrap form-grid">
-      <div class="form-pitch">
-        <span class="eyebrow light">Unlock Market Data</span>
-        <h2 class="sec-h">Intelligence built on real transactions.</h2>
-        <p class="form-sub">
-          Verify your details to get full access to Mitraya AI. No credit card required. Look up unlimited localities and projects instantly.
+  <main class="stage">
+    <div class="stage-grid">
+
+      <!-- ── PITCH ─────────────────────────────────────────── -->
+      <div class="pitch">
+        <span class="offer-pill">
+          <span class="tag">LAUNCH OFFER</span>
+          1,00,000 free tokens on signup — Claude + Gemini included
+        </span>
+
+        <h1 class="hero-h">
+          Stop guessing what a property is worth.
+          <span class="survey-underline">Ask Mitraya.</span>
+        </h1>
+
+        <p class="hero-sub">
+          <strong>Mitraya LLM</strong> is an AI property intelligence engine, powered by <span class="model-name">Claude</span> and <span class="model-name">Gemini</span>, covering valuations, price trends, and project insights across cities in India — built for buyers, investors, brokers, and developers who want real data, not guesswork.
         </p>
+
+        <div class="coverage">
+          <span>MUMBAI</span><span>BENGALURU</span><span>DELHI NCR</span>
+          <span>PUNE</span><span>HYDERABAD</span><span>CHENNAI</span>
+          <span class="more">+ every major Indian city</span>
+        </div>
+
+        <ul class="hero-trust">
+          <li><span class="tick">✓</span> Instant AI valuations</li>
+          <li><span class="tick">✓</span> Real transaction data</li>
+          <li><span class="tick">✓</span> No card required</li>
+        </ul>
+
+        <div class="token-card">
+          <div class="contour-rings" aria-hidden="true">
+            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="100" cy="100" r="30" fill="none" stroke="#B8862E" stroke-width="1"/>
+              <circle cx="100" cy="100" r="55" fill="none" stroke="#B8862E" stroke-width="1"/>
+              <circle cx="100" cy="100" r="80" fill="none" stroke="#B8862E" stroke-width="1"/>
+              <circle cx="100" cy="100" r="105" fill="none" stroke="#B8862E" stroke-width="1"/>
+            </svg>
+          </div>
+          <div class="stamp">
+            <div class="stamp-txt">AI<br/>VERIFIED</div>
+          </div>
+          <div class="token-copy">
+            <span class="num">1,00,000 <span class="models">Claude + Gemini</span> tokens</span>
+            <p><strong>Free on your account</strong> — run unlimited valuation and locality queries on both models, on us.</p>
+          </div>
+        </div>
       </div>
 
+      <!-- ── FORM ──────────────────────────────────────────── -->
       <div class="form-card">
-        
+
+        <div class="timer-band">
+          <div class="timer-band-l"><span class="live-dot"></span> Claim window for this visit</div>
+          <div class="timer-clock" id="offerTimer">05:00</div>
+        </div>
+
         <!-- STEP 1: REGISTRATION FORM -->
         <form id="regForm" novalidate>
-          <h3 class="form-title">Create your free account</h3>
+          <div class="form-title">Create your free account</div>
+          <div class="form-title-sub">Unlock 1,00,000 free <span class="models">Claude + Gemini</span> tokens instantly — no payment details needed.</div>
 
           <div class="field">
             <label for="full_name">Full Name</label>
-            <input id="full_name" type="text" placeholder="e.g. Tanmay P" required />
+            <input id="full_name" type="text" placeholder="e.g. Tanmay P" required autocomplete="name" />
             <span class="err" data-err="full_name">Please enter your name.</span>
           </div>
 
           <div class="field">
             <label for="email">Email Address</label>
-            <input id="email" type="email" placeholder="you@domain.com" required />
+            <input id="email" type="email" placeholder="you@domain.com" required autocomplete="email" />
             <span class="err" data-err="email">Enter a valid email.</span>
           </div>
 
           <div class="field">
             <label for="mobile">Mobile Number</label>
-            <input id="mobile" type="tel" maxlength="10" placeholder="10-digit mobile" required />
+            <input id="mobile" type="tel" maxlength="10" placeholder="10-digit mobile" required autocomplete="tel" />
             <span class="err" data-err="mobile">Enter a valid 10-digit mobile.</span>
           </div>
 
           <div class="field">
             <label for="password">Password</label>
-            <input id="password" type="password" placeholder="••••••••" required />
+            <input id="password" type="password" placeholder="••••••••" required autocomplete="new-password" />
             <span class="err" data-err="password">Password must be at least 6 characters.</span>
           </div>
 
-          <button id="submitRegBtn" type="submit" class="btn btn-solid btn-block btn-lg">
-            Register Free
+          <button id="submitRegBtn" type="submit" class="btn btn-solid btn-block">
+            Claim 1,00,000 Claude + Gemini tokens
           </button>
+          <p class="form-fine">Includes Claude &amp; Gemini access. No credit card. Cancel anytime.</p>
         </form>
 
         <!-- STEP 2: OTP VERIFICATION -->
         <form id="otpForm" class="form-state" style="display:none;" novalidate>
           <div class="state-ico">✉️</div>
           <h3>Verify your account</h3>
-          <p>We've sent a 6-digit code to your email/mobile. Enter it below to unlock access.</p>
-          
+          <p>We've sent a 6-digit code to your email/mobile. Enter it below to unlock your Claude + Gemini tokens.</p>
+
           <div class="field">
             <input id="otpCode" class="otp-input" type="text" maxlength="6" placeholder="------" required />
             <span class="err" data-err="otpCode">Please enter the 6 digit code.</span>
           </div>
 
-          <button id="submitOtpBtn" type="submit" class="btn btn-solid btn-block btn-lg">
-            Verify & Proceed
+          <button id="submitOtpBtn" type="submit" class="btn btn-solid btn-block">
+            Verify &amp; unlock Claude + Gemini tokens
           </button>
         </form>
 
@@ -338,26 +447,27 @@ button{ font:inherit; }
           <div class="state-ico">↻</div>
           <h3>Account already exists</h3>
           <p id="dupeMsg">This mobile or email is already registered with Mitraya.</p>
-          <button onclick="window.location.href='https://app.mitrayallm.com/'" class="btn btn-solid btn-block btn-lg">
+          <button onclick="window.location.href='https://app.mitrayallm.com/'" class="btn btn-solid btn-block">
             Go to Login
           </button>
         </div>
 
       </div>
+
     </div>
-  </section>
-</main>
+  </main>
+
+</div>
 
 <script>
 /* ============================================================
-   Mitraya AI — Frontend Logic[cite: 3]
+   Mitraya LLM — Frontend Logic
    ------------------------------------------------------------
    1) POST /api/realstate/register (Local backend check)
    2) POST /api/realstate/verify (Local backend + External API)
    3) GET Convert API (Only fires if Verify is 200 OK)
    ============================================================ */
 
-// const BACKEND_BASE_ = 'http://localhost:8080'; // Configured for your local testing
 const BACKEND_BASE = 'https://asia-south1-deploying-4c386.cloudfunctions.net/leadgeneration_api';
 const CONVERT_URL  = 'https://asia-south1-deploying-4c386.cloudfunctions.net/global_api/api/convert';
 const DEFAULT_PAYOUT = '0.3';
@@ -369,7 +479,7 @@ const toggleErr = (id, show) => {
   byId(id).classList.toggle('invalid', show);
 };
 
-// URL Params Extractor for S2S Tracking[cite: 3]
+// URL Params Extractor for S2S Tracking
 function getTrackingParams() {
   const q = new URLSearchParams(window.location.search);
   return {
@@ -386,10 +496,10 @@ function getTrackingParams() {
   };
 }
 
-// Postback Trigger (Fires strictly on successful verification)[cite: 3]
+// Postback Trigger (Fires strictly on successful verification)
 function sendConversion(tracking) {
   if (!tracking.clid && !tracking.pid) return; // Prevent empty fires
-  
+
   let url = `${CONVERT_URL}?goal=1&payout=${encodeURIComponent(tracking.payout)}`;
   ['pid', 'oid', 'clid', 'sub1', 'zone', 'utm_source', 'cost'].forEach(key => {
     if (tracking[key]) url += `&${key}=${encodeURIComponent(tracking[key])}`;
@@ -405,23 +515,22 @@ let pendingUser = null;
 /* ── STEP 1: Registration Handler ─────────────────────────── */
 byId('regForm').addEventListener('submit', async (e) => {
   e.preventDefault();
-  
-  // Basic Validations
+
   const fn = byId('full_name').value.trim();
   const em = byId('email').value.trim();
   const mb = byId('mobile').value.trim();
   const pw = byId('password').value;
-  
-  let valid = true;
-  if(fn.length < 2) { toggleErr('full_name', true); valid = false; } else toggleErr('full_name', false);
-  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)) { toggleErr('email', true); valid = false; } else toggleErr('email', false);
-  if(!/^[6-9]\d{9}$/.test(mb)) { toggleErr('mobile', true); valid = false; } else toggleErr('mobile', false);
-  if(pw.length < 6) { toggleErr('password', true); valid = false; } else toggleErr('password', false);
 
-  if(!valid) return;
+  let valid = true;
+  if (fn.length < 2) { toggleErr('full_name', true); valid = false; } else toggleErr('full_name', false);
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)) { toggleErr('email', true); valid = false; } else toggleErr('email', false);
+  if (!/^[6-9]\d{9}$/.test(mb)) { toggleErr('mobile', true); valid = false; } else toggleErr('mobile', false);
+  if (pw.length < 6) { toggleErr('password', true); valid = false; } else toggleErr('password', false);
+
+  if (!valid) return;
 
   const btn = byId('submitRegBtn');
-  btn.disabled = true; btn.textContent = 'Registering...';
+  btn.disabled = true; btn.textContent = 'Registering…';
 
   pendingUser = { full_name: fn, email: em, mobile: mb, password: pw, tracking: getTrackingParams() };
 
@@ -435,24 +544,22 @@ byId('regForm').addEventListener('submit', async (e) => {
     const data = await res.json();
 
     if (res.status === 409) {
-      // DUPLICATE GUARD: Do not trigger postback. Show duplicate state.
       byId('regForm').style.display = 'none';
       byId('dupeState').style.display = 'block';
-      if(data.redirectTo) {
-        setTimeout(() => window.location.href = data.redirectTo, 2500); // Auto-redirect after 2.5s
+      if (data.redirectTo) {
+        setTimeout(() => window.location.href = data.redirectTo, 2500);
       }
       return;
     }
 
     if (!res.ok) throw new Error(data.message || 'Registration failed');
 
-    // Success: Hide Register, Show OTP Form
     byId('regForm').style.display = 'none';
     byId('otpForm').style.display = 'block';
 
   } catch (err) {
     alert(err.message);
-    btn.disabled = false; btn.textContent = 'Register Free';
+    btn.disabled = false; btn.textContent = 'Claim 1,00,000 Claude + Gemini tokens';
   }
 });
 
@@ -460,11 +567,11 @@ byId('regForm').addEventListener('submit', async (e) => {
 byId('otpForm').addEventListener('submit', async (e) => {
   e.preventDefault();
   const code = byId('otpCode').value.trim();
-  
-  if(code.length < 4) { toggleErr('otpCode', true); return; } else toggleErr('otpCode', false);
+
+  if (code.length < 4) { toggleErr('otpCode', true); return; } else toggleErr('otpCode', false);
 
   const btn = byId('submitOtpBtn');
-  btn.disabled = true; btn.textContent = 'Verifying...';
+  btn.disabled = true; btn.textContent = 'Verifying…';
 
   try {
     const res = await fetch(`${BACKEND_BASE}/api/realstate/verify`, {
@@ -476,23 +583,50 @@ byId('otpForm').addEventListener('submit', async (e) => {
     const data = await res.json();
     if (!res.ok) throw new Error(data.message || 'Invalid verification code');
 
-    // ✅ CRITICAL PATH: Lead is verified & stored in DB. Fire Conversion S2S.[cite: 3]
     sendConversion(pendingUser.tracking);
 
-    btn.textContent = 'Success! Redirecting...';
-    btn.style.background = '#10b981'; // Green success color
-    
-    // Redirect to the main application
+    btn.textContent = 'Success! Redirecting…';
+    btn.style.background = '#125F53';
+
     setTimeout(() => window.location.href = 'https://app.mitrayallm.com/', 1000);
 
   } catch (err) {
     alert(err.message);
-    btn.disabled = false; btn.textContent = 'Verify & Proceed';
+    btn.disabled = false; btn.textContent = 'Verify & unlock Claude + Gemini tokens';
   }
 });
 
 // Enforce numbers only on mobile input
 byId('mobile').addEventListener('input', e => e.target.value = e.target.value.replace(/\D/g, '').slice(0, 10));
+
+/* ── FOMO COUNTDOWN — 5:00 rolling window from page load ──── */
+(function startOfferTimer(){
+  const el = byId('offerTimer');
+  let remaining = 5 * 60; // seconds
+
+  function render(){
+    const m = Math.floor(remaining / 60).toString().padStart(2, '0');
+    const s = (remaining % 60).toString().padStart(2, '0');
+    el.textContent = `${m}:${s}`;
+  }
+  render();
+
+  const iv = setInterval(() => {
+    remaining -= 1;
+    if (remaining <= 0) {
+      remaining = 0;
+      render();
+      el.textContent = 'Refreshing…';
+      // Soft-reset the window rather than pressuring with a hard cutoff —
+      // this is a rolling claim-window nudge, not a false scarcity deadline.
+      setTimeout(() => { remaining = 5 * 60; render(); }, 1500);
+      clearInterval(iv);
+      startOfferTimer();
+      return;
+    }
+    render();
+  }, 1000);
+})();
 </script>
 </body>
 </html>
