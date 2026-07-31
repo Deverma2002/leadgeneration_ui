@@ -134,6 +134,16 @@ button{ font:inherit; }
 /* ── LEFT: PITCH ─────────────────────────────────────────── */
 .pitch{ min-width:0; }
 
+/* value-h2 — plain statement of what the user gets, replaces the
+   old decorative skyline bar so the offer is legible at a glance */
+.value-h2{
+  font-family:'Newsreader',serif; font-style:italic; font-weight:600;
+  font-size:clamp(1.5rem, 2.6vw, 2.15rem);
+  letter-spacing:-.01em; color:var(--gold-deep);
+  margin-bottom:18px; line-height:1.2;
+  max-width:100%;
+}
+
 .offer-pill{
   display:inline-flex; align-items:center; gap:10px;
   background:var(--ink); color:var(--gold-soft);
@@ -338,6 +348,11 @@ button{ font:inherit; }
 
       <!-- ── PITCH ─────────────────────────────────────────── -->
       <div class="pitch">
+
+        <h2 class="value-h2">
+          Real Estate Valuations, Reimagined by AI
+        </h2>
+
         <span class="offer-pill">
           <span class="tag">LAUNCH OFFER</span>
           1,00,000 free tokens on signup — Claude + Gemini included
