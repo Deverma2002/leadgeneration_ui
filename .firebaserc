@@ -1,5 +1,7 @@
 {
   "projects": {
-    "default": "deploying-4c386"
-  }
+    "default": "mitryallm"
+  },
+  "targets": {},
+  "etags": {}
 }

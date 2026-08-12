@@ -1,0 +1,32 @@
+curl 'https://www.google-analytics.com/g/collect?v=2&tid=G-GQSD4JWRJ4&gtm=45je68b0h2v9259724139za200zd9259724139&_p=1786532796282&gcd=13l3l3l3l1l1&npa=0&dma=0&_eu=AAAAAAQ&are=1&cid=1163989787.1786532797&frm=0&ngs=1&pscdl=noapi&rcb=7&sr=1920x1080&uaa=x86&uab=64&uafvl=Chromium%3B148.0.7778.96%7CGoogle%2520Chrome%3B148.0.7778.96%7CNot%252FA)Brand%3B99.0.0.0&uam=&uamb=0&uap=Linux&uapv=&uaw=0&ul=en-us&_s=4&tag_exp=115616985~115938466~115938469~118897920~118897930~119367802~119367810~119527019~119896803&dp=%2FsignupOtp&dt=signupOtp&dl=https%3A%2F%2Fapp.mitrayallm.com%2FsignupOtp&sid=1786532796&sct=1&seg=1&en=page_view&_ee=1&_et=7986&tfd=48042' \
+  -X 'POST' \
+  -H 'sec-ch-ua-platform: "Linux"' \
+  -H 'Referer: https://app.mitrayallm.com/' \
+  -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36' \
+  -H 'sec-ch-ua: "Chromium";v="148", "Google Chrome";v="148", "Not/A)Brand";v="99"' \
+  -H 'sec-ch-ua-mobile: ?0'
+
+
+
+
+  curl 'https://www.google-analytics.com/g/collect?v=2&tid=G-GQSD4JWRJ4&gtm=45je6871v9259724139za200zd9259724139&_p=1786440928259&gcd=13l3l3l3l1l1&npa=0&dma=0&_eu=AAAAAAQ&are=1&cid=1698360958.1786440929&frm=0&ngs=1&pscdl=noapi&rcb=1&sr=1920x1080&uaa=x86&uab=64&uafvl=Chromium%3B148.0.7778.96%7CGoogle%2520Chrome%3B148.0.7778.96%7CNot%252FA)Brand%3B99.0.0.0&uam=&uamb=0&uap=Linux&uapv=&uaw=0&ul=en-us&_s=4&tag_exp=115616985~115938465~115938468~118897920~118897930~119367802~119367810~119381664~119527019~119896803&dp=%2FsignupOtp&dt=signupOtp&dl=https%3A%2F%2Fapp.mitrayallm.com%2FsignupOtp&sid=1786440928&sct=1&seg=1&en=page_view&_ee=1&_et=234634&tfd=878467' \
+  -X 'POST' \
+  -H 'sec-ch-ua-platform: "Linux"' \
+  -H 'Referer: https://app.mitrayallm.com/' \
+  -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36' \
+  -H 'sec-ch-ua: "Chromium";v="148", "Google Chrome";v="148", "Not/A)Brand";v="99"' \
+  -H 'sec-ch-ua-mobile: ?0'
+
+
+
+curl 'https://www.google-analytics.com/g/collect?v=2&tid=G-GQSD4JWRJ4&gtm=45je6871v9259724139za200zd9259724139&_p=1786440928259&gcd=13l3l3l3l1l1&npa=0&dma=0&_eu=AAAAAAQ&are=1&cid=1698360958.1786440929&frm=0&ngs=1&pscdl=noapi&rcb=1&sr=1920x1080&uaa=x86&uab=64&uafvl=Chromium%3B148.0.7778.96%7CGoogle%2520Chrome%3B148.0.7778.96%7CNot%252FA)Brand%3B99.0.0.0&uam=&uamb=0&uap=Linux&uapv=&uaw=0&ul=en-us&_s=5&tag_exp=115616985~115938465~115938468~118897920~118897930~119367802~119367810~119381664~119527019~119896803&dp=%2Fplans&dt=plans&dl=https%3A%2F%2Fapp.mitrayallm.com%2Fplans&sid=1786440928&sct=1&seg=1&en=page_view&_ee=1&_et=37762&tfd=923984' \
+  -X 'POST' \
+  -H 'sec-ch-ua-platform: "Linux"' \
+  -H 'Referer: https://app.mitrayallm.com/' \
+  -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36' \
+  -H 'sec-ch-ua: "Chromium";v="148", "Google Chrome";v="148", "Not/A)Brand";v="99"' \
+  -H 'sec-ch-ua-mobile: ?0'
+
+
+
+
