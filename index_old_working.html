@@ -28,31 +28,22 @@
                survey gold (valuation/currency), claim-red (urgency)
    Type      : Newsreader (display serif, editorial/trustworthy)
                + IBM Plex Sans (body) + IBM Plex Mono (data figures)
-   Signature : topographic contour rings behind the valuation
-               figure + a rotated "surveyor's stamp" badge —
-               literalizes "we survey the data" instead of a
-               generic gradient blob or numbered-step layout.
    ============================================================ */
 
     :root {
       --ink: #10201C;
-      /* pine-black ground, not navy   */
       --ink-2: #172B25;
       --ink-line: #25423A;
       --paper: #F3EEE1;
-      /* aged parchment                */
       --paper-2: #E5DCC4;
       --paper-line: #D8CDAE;
       --teal: #1B8272;
-      /* signal accent — AI reads data */
       --teal-deep: #125F53;
       --teal-soft: #DCEEEA;
       --gold: #B8862E;
-      /* survey gold — valuation/value */
       --gold-deep: #8E661F;
       --gold-soft: #F0E2C2;
       --claim: #C1441E;
-      /* claim-red — urgency/offer     */
       --claim-deep: #9C3517;
       --claim-soft: #F7E1D6;
       --slate: #5C6660;
@@ -61,7 +52,7 @@
       --rust: #B33B2C;
 
       --maxw: 1280px;
-      --pad: clamp(18px, 3.6vw, 44px);
+      --pad: clamp(14px, 3vw, 36px);
       --r: 12px;
       --r-lg: 18px;
 
@@ -87,10 +78,10 @@
       font-family: 'IBM Plex Sans', system-ui, sans-serif;
       background: var(--paper);
       color: var(--ink);
-      line-height: 1.5;
+      line-height: 1.45;
       -webkit-font-smoothing: antialiased;
-      overflow: hidden;
-      /* single viewport — no page scroll on desktop */
+      overflow-y: auto; /* Enabled vertical scrolling to prevent cutoffs */
+      overflow-x: hidden;
     }
 
     a {
@@ -120,8 +111,8 @@
 
     /* ── APP SHELL ───────────────────────────────────────────── */
     .app {
-      height: 100vh;
-      height: 100dvh;
+      min-height: 100vh;
+      min-height: 100dvh;
       display: flex;
       flex-direction: column;
       background:
@@ -129,19 +120,33 @@
         var(--paper);
     }
 
+    /* ── TOP BANNER ──────────────────────────────────────────── */
+    .top-banner {
+      background: #957849;
+      color: #F8F3E6;
+      text-align: center;
+      padding: 8px 16px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      z-index: 60;
+      position: relative;
+    }
+
     /* ── TOP BAR ─────────────────────────────────────────────── */
     .topbar {
       flex: 0 0 auto;
-      border-bottom: 1px solid var(--paper-line);
-      background: var(--paper);
+      background: transparent;
       z-index: 50;
+      padding-top: 4px;
     }
 
     .topbar-in {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      height: 60px;
+      justify-content: flex-start;
+      height: 50px;
       gap: 16px;
     }
 
@@ -153,8 +158,8 @@
     }
 
     .brand-mark {
-      width: 34px;
-      height: 34px;
+      width: 30px;
+      height: 30px;
       border-radius: 8px;
       flex: 0 0 auto;
       background: var(--ink);
@@ -164,8 +169,8 @@
     }
 
     .brand-mark svg {
-      width: 19px;
-      height: 19px;
+      width: 17px;
+      height: 17px;
       display: block;
     }
 
@@ -177,7 +182,7 @@
 
     .brand-word {
       font-family: 'Newsreader', serif;
-      font-size: 1.22rem;
+      font-size: 1.12rem;
       letter-spacing: -.01em;
     }
 
@@ -188,25 +193,10 @@
 
     .brand-tag {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: .6rem;
+      font-size: .55rem;
       font-weight: 500;
       letter-spacing: .12em;
       color: var(--teal-deep);
-    }
-
-    .topbar-offer {
-      display: flex;
-      align-items: center;
-      gap: 9px;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: .74rem;
-      font-weight: 600;
-      color: var(--claim-deep);
-      background: var(--claim-soft);
-      padding: 7px 13px;
-      border-radius: 8px;
-      border: 1px solid rgba(193, 68, 30, .22);
-      white-space: nowrap;
     }
 
     .live-dot {
@@ -219,23 +209,16 @@
     }
 
     @keyframes pulse {
-
-      0%,
-      100% {
-        opacity: 1
-      }
-
-      50% {
-        opacity: .3
-      }
+      0%, 100% { opacity: 1 }
+      50% { opacity: .3 }
     }
 
     /* ── MAIN STAGE ──────────────────────────────────────────── */
     .stage {
       flex: 1 1 auto;
-      min-height: 0;
       display: flex;
       align-items: stretch;
+      padding-bottom: 30px;
     }
 
     .stage-grid {
@@ -245,9 +228,101 @@
       padding-inline: var(--pad);
       display: grid;
       grid-template-columns: 1.05fr .95fr;
-      gap: clamp(24px, 3.4vw, 56px);
+      gap: clamp(20px, 3vw, 40px);
+      align-items: flex-start;
+    }
+
+    /* ── HERO 4-CARD ROW ─────────────────────────────────────── */
+    .hero-cards-row {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .hcard {
+      border-radius: 12px;
+      padding: 14px 14px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      box-shadow: 0 8px 20px -8px rgba(0,0,0,0.15);
+      overflow: hidden;
+    }
+
+    .hcard-green { background: #559e88; color: #0a1f18; }
+    .hcard-red { background: #b11f1f; color: #fff; }
+    .hcard-lblue { background: #8dc1f5; color: #0f1c30; }
+    .hcard-dblue { background: #1a2558; color: #fff; }
+
+    .hcard-title-sm {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      opacity: 0.9;
+    }
+
+    .hcard-title-lg {
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: auto;
+      padding-bottom: 8px;
+    }
+
+    .hcard-foot {
+      font-size: 0.65rem;
+      opacity: 0.85;
+      line-height: 1.2;
+      font-weight: 500;
+    }
+
+    .hcard-logo-area {
+      height: 30px;
+      margin-bottom: 10px;
+      display: flex;
       align-items: center;
-      min-height: 0;
+      gap: 6px;
+    }
+
+    .hcard-logos-text {
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+    }
+
+    .n-logo-large {
+      background: #000;
+      color: #e50914;
+      width: 24px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      font-weight: 900;
+      font-family: Arial, sans-serif;
+      border-radius: 3px;
+    }
+
+    .badge-new {
+      position: absolute;
+      top: 10px;
+      right: -22px;
+      background: #e2c284;
+      color: #000;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.55rem;
+      font-weight: 700;
+      padding: 3px 22px;
+      transform: rotate(45deg);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
     }
 
     /* ── LEFT: PITCH ─────────────────────────────────────────── */
@@ -255,50 +330,11 @@
       min-width: 0;
     }
 
-    /* value-h2 — plain statement of what the user gets, replaces the
-   old decorative skyline bar so the offer is legible at a glance */
-    .value-h2 {
-      font-family: 'Newsreader', serif;
-      font-style: italic;
-      font-weight: 600;
-      font-size: clamp(1.5rem, 2.6vw, 2.15rem);
-      letter-spacing: -.01em;
-      color: var(--gold-deep);
-      margin-bottom: 18px;
-      line-height: 1.2;
-      max-width: 100%;
-    }
-
-    .offer-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: var(--ink);
-      color: var(--gold-soft);
-      padding: 7px 15px 7px 7px;
-      border-radius: 9px;
-      font-size: .76rem;
-      font-weight: 600;
-      margin-bottom: 18px;
-      box-shadow: 0 8px 20px -10px rgba(16, 32, 28, .55);
-    }
-
-    .offer-pill .tag {
-      background: var(--claim);
-      color: #fff;
-      font-family: 'IBM Plex Mono', monospace;
-      font-weight: 700;
-      font-size: .68rem;
-      padding: 3px 8px;
-      border-radius: 5px;
-      letter-spacing: .04em;
-    }
-
     .hero-h {
       font-family: 'Newsreader', serif;
       font-weight: 600;
-      font-size: clamp(1.7rem, 2.85vw, 2.8rem);
-      line-height: 1.09;
+      font-size: clamp(1.6rem, 2.5vw, 2.6rem);
+      line-height: 1.1;
       letter-spacing: -.02em;
       margin-bottom: 14px;
     }
@@ -306,27 +342,17 @@
     .survey-underline {
       position: relative;
       white-space: nowrap;
-      color: var(--teal-deep);
+      color: #1a6559;
       font-style: italic;
-    }
-
-    .survey-underline::after {
-      content: "";
-      position: absolute;
-      left: -.05em;
-      right: -.05em;
-      bottom: .05em;
-      height: .36em;
-      background: var(--gold-soft);
-      z-index: -1;
-      border-radius: 2px;
+      text-transform: uppercase;
     }
 
     .hero-sub {
-      font-size: clamp(.9rem, 1.05vw, 1rem);
+      font-size: clamp(0.85rem, 0.98vw, 0.98rem);
       color: var(--slate);
       max-width: 44em;
       margin-bottom: 16px;
+      line-height: 1.5;
     }
 
     .hero-sub strong {
@@ -334,8 +360,6 @@
     }
 
     .hero-sub .model-name {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: .92em;
       font-weight: 600;
       color: var(--teal-deep);
     }
@@ -343,153 +367,60 @@
     .coverage {
       display: flex;
       flex-wrap: wrap;
-      gap: 6px;
+      gap: 5px;
       margin-bottom: 16px;
     }
 
     .coverage span {
-      font-size: .72rem;
+      font-size: .68rem;
       font-weight: 600;
-      color: var(--teal-deep);
-      background: var(--teal-soft);
-      padding: 5px 10px;
-      border-radius: 6px;
+      color: var(--ink);
+      background: var(--paper-2);
+      border: 1px solid var(--paper-line);
+      padding: 4px 8px;
+      border-radius: 4px;
       font-family: 'IBM Plex Mono', monospace;
+    }
+
+    .coverage span.active-city {
+      background: #8E6E34;
+      color: #fff;
+      border-color: #8E6E34;
     }
 
     .coverage span.more {
       color: var(--slate);
-      background: var(--paper-2);
+      background: transparent;
+      border: none;
     }
 
     .hero-trust {
       display: flex;
       flex-wrap: wrap;
-      gap: 11px 18px;
-      margin-bottom: 16px;
+      gap: 10px 16px;
+      margin-bottom: 12px;
     }
 
     .hero-trust li {
       display: flex;
       align-items: center;
-      gap: 7px;
-      font-size: .82rem;
-      color: var(--slate);
-      font-weight: 500;
+      gap: 6px;
+      font-size: .8rem;
+      color: var(--ink);
+      font-weight: 600;
     }
 
     .tick {
       display: inline-grid;
       place-items: center;
-      width: 17px;
-      height: 17px;
-      flex: 0 0 17px;
+      width: 15px;
+      height: 15px;
+      flex: 0 0 15px;
       border-radius: 50%;
-      background: var(--teal-soft);
-      color: var(--teal-deep);
-      font-size: .6rem;
+      background: var(--paper-line);
+      color: var(--ink);
+      font-size: .55rem;
       font-weight: 700;
-    }
-
-    /* ── TOKEN OFFER CARD — signature element ───────────────────
-   Topographic contour rings + rotated survey stamp, echoing a
-   surveyor's official mark on a land document.                */
-    .token-card {
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      background: var(--ink);
-      color: var(--paper);
-      border-radius: var(--r);
-      padding: 16px 18px;
-      box-shadow: var(--shadow);
-      border: 1px solid var(--ink-line);
-    }
-
-    .contour-rings {
-      position: absolute;
-      right: -40px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 180px;
-      height: 180px;
-      pointer-events: none;
-      opacity: .5;
-    }
-
-    .contour-rings svg {
-      width: 100%;
-      height: 100%;
-    }
-
-    .stamp {
-      flex: 0 0 auto;
-      width: 54px;
-      height: 54px;
-      border-radius: 50%;
-      border: 2px solid var(--gold);
-      display: grid;
-      place-items: center;
-      transform: rotate(-8deg);
-      position: relative;
-      z-index: 1;
-      background: rgba(184, 134, 46, .08);
-    }
-
-    .stamp::before {
-      content: "";
-      position: absolute;
-      inset: 4px;
-      border-radius: 50%;
-      border: 1px dashed rgba(184, 134, 46, .55);
-    }
-
-    .stamp-txt {
-      font-family: 'IBM Plex Mono', monospace;
-      font-weight: 700;
-      font-size: .58rem;
-      color: var(--gold);
-      text-align: center;
-      line-height: 1.2;
-      letter-spacing: .02em;
-    }
-
-    .token-copy {
-      position: relative;
-      z-index: 1;
-      min-width: 0;
-    }
-
-    .token-copy .num {
-      font-family: 'IBM Plex Mono', monospace;
-      font-weight: 700;
-      font-size: 1.05rem;
-      color: var(--gold);
-      display: block;
-      margin-bottom: 2px;
-      line-height: 1.35;
-    }
-
-    .token-copy .num .models {
-      color: var(--teal-soft);
-      font-size: .92em;
-    }
-
-    .token-copy p {
-      font-size: .8rem;
-      color: var(--slate-d);
-      line-height: 1.45;
-    }
-
-    .token-copy p strong {
-      color: var(--paper);
-    }
-
-    .form-title-sub .models,
-    .hero-sub .model-name {
-      font-weight: 600;
     }
 
     /* ── RIGHT: FORM CARD ────────────────────────────────────── */
@@ -499,10 +430,9 @@
       border-radius: var(--r-lg);
       box-shadow: var(--shadow-card);
       border: 1px solid var(--paper-line);
-      padding: clamp(18px, 2.4vw, 26px);
+      padding: clamp(14px, 2vw, 20px);
       display: flex;
       flex-direction: column;
-      max-height: min(660px, 84vh);
       position: relative;
     }
 
@@ -511,74 +441,81 @@
       align-items: center;
       justify-content: space-between;
       gap: 10px;
-      background: var(--claim-soft);
-      border: 1px solid rgba(193, 68, 30, .22);
-      border-radius: 9px;
-      padding: 9px 13px;
-      margin-bottom: 16px;
+      background: var(--paper-2);
+      border: 1px solid var(--paper-line);
+      border-radius: 8px;
+      padding: 7px 10px;
+      margin-bottom: 12px;
     }
 
     .timer-band-l {
       display: flex;
       align-items: center;
-      gap: 8px;
-      font-size: .76rem;
+      gap: 6px;
+      font-size: .72rem;
       font-weight: 600;
-      color: var(--claim-deep);
+      color: #8a341e;
     }
 
     .timer-clock {
       font-family: 'IBM Plex Mono', monospace;
       font-weight: 700;
-      font-size: .94rem;
-      color: var(--claim-deep);
+      font-size: .88rem;
+      color: var(--ink);
       background: #fff;
-      padding: 4px 10px;
-      border-radius: 6px;
+      padding: 3px 8px;
+      border-radius: 5px;
       letter-spacing: .02em;
-      min-width: 56px;
+      min-width: 50px;
       text-align: center;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
     }
 
     .form-title {
       font-family: 'Newsreader', serif;
-      font-size: 1.28rem;
+      font-size: 1.2rem;
       font-weight: 600;
       margin-bottom: 3px;
     }
 
     .form-title-sub {
-      font-size: .82rem;
+      font-size: .78rem;
       color: var(--slate);
-      margin-bottom: 16px;
+      margin-bottom: 12px;
+      line-height: 1.4;
     }
 
     .form-title-sub .models {
       color: var(--teal-deep);
       font-weight: 600;
     }
+    
+    .form-title-sub .netflix {
+      color: #b31b1b;
+      font-weight: 700;
+    }
 
     .field {
-      margin-bottom: 11px;
+      margin-bottom: 9px;
     }
 
     .field label {
       display: block;
-      font-size: .76rem;
+      font-size: .74rem;
       font-weight: 600;
-      margin-bottom: 5px;
+      margin-bottom: 4px;
       color: var(--ink);
     }
 
     .field input {
       width: 100%;
       font: inherit;
-      font-size: .9rem;
+      font-size: .85rem;
       color: var(--ink);
-      background: var(--paper);
+      background: #f7f4ec;
       border: 1.5px solid var(--paper-line);
-      border-radius: 8px;
-      padding: 10px 12px;
+      border-radius: 7px;
+      padding: 8px 10px;
       transition: border-color .15s, box-shadow .15s;
     }
 
@@ -600,8 +537,8 @@
     .err {
       display: none;
       color: var(--rust);
-      font-size: .74rem;
-      margin-top: 4px;
+      font-size: .7rem;
+      margin-top: 3px;
       font-weight: 500;
     }
 
@@ -609,12 +546,33 @@
       display: block;
     }
 
+    .netflix-notice {
+      background: #F8E5E5;
+      color: #7D2121;
+      border: 1px solid #E8C1C1;
+      padding: 8px 10px;
+      border-radius: 7px;
+      font-size: 0.74rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    
+    .netflix-notice .n-icon {
+      color: #e50914;
+      font-weight: 900;
+      font-size: 1rem;
+      font-family: Arial, sans-serif;
+    }
+
     .form-fine {
-      font-size: .7rem;
+      font-size: .65rem;
       color: var(--slate);
       text-align: center;
-      margin-top: 10px;
-      line-height: 1.5;
+      margin-top: 8px;
+      line-height: 1.4;
     }
 
     /* ── BUTTONS ─────────────────────────────────────────────── */
@@ -625,24 +583,25 @@
       gap: 8px;
       font-family: 'IBM Plex Sans', sans-serif;
       font-weight: 700;
-      font-size: .92rem;
-      padding: 12px 20px;
-      border-radius: 9px;
+      font-size: 0.92rem;
+      padding: 11px 16px;
+      border-radius: 7px;
       border: 0;
       cursor: pointer;
       transition: transform .16s var(--ease), box-shadow .16s var(--ease), background .16s var(--ease);
     }
 
     .btn-solid {
-      background: var(--claim);
+      background: linear-gradient(to bottom, #bd985e, #967439);
       color: #fff;
-      box-shadow: 0 10px 22px -10px rgba(193, 68, 30, .55);
+      box-shadow: 0 8px 18px -8px rgba(150, 116, 57, .55);
+      border: 1px solid #7d602e;
     }
 
     .btn-solid:hover {
-      background: var(--claim-deep);
+      background: linear-gradient(to bottom, #ac8a53, #856633);
       transform: translateY(-2px);
-      box-shadow: 0 14px 26px -10px rgba(193, 68, 30, .6);
+      box-shadow: 0 12px 22px -8px rgba(150, 116, 57, .6);
     }
 
     .btn-block {
@@ -663,13 +622,13 @@
     }
 
     .state-ico {
-      width: 48px;
-      height: 48px;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
-      margin: 0 auto 14px;
+      margin: 0 auto 12px;
       display: grid;
       place-items: center;
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       font-weight: 700;
     }
 
@@ -685,58 +644,43 @@
 
     .form-state h3 {
       font-family: 'Newsreader', serif;
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       font-weight: 600;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .form-state p {
       color: var(--slate);
-      font-size: .86rem;
-      margin-bottom: 16px;
+      font-size: .82rem;
+      margin-bottom: 14px;
     }
 
     .otp-input {
       letter-spacing: .4rem !important;
       text-align: center;
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 1.25rem !important;
+      font-size: 1.15rem !important;
     }
 
     /* ── RESPONSIVE ──────────────────────────────────────────── */
     @media (max-width:900px) {
-      body {
-        overflow-y: auto;
-        overflow-x: hidden;
-      }
-
-      .app {
-        height: auto;
-        min-height: 100vh;
-        min-height: 100dvh;
-      }
-
       .stage-grid {
         grid-template-columns: 1fr;
-        padding-block: 18px;
+        padding-block: 14px;
       }
 
-      .form-card {
-        max-height: none;
+      .hero-cards-row {
+        grid-template-columns: 1fr 1fr;
       }
 
       .coverage {
         display: none;
       }
-
-      .contour-rings {
-        display: none;
-      }
     }
-
-    @media (max-width:520px) {
-      .topbar-offer span.offer-label {
-        display: none;
+    
+    @media (max-width:550px) {
+      .hero-cards-row {
+        grid-template-columns: 1fr;
       }
     }
 
@@ -753,6 +697,10 @@
 
   <div class="app">
 
+    <div class="top-banner">
+      LIMITED LAUNCH OFFER: 1,00,000 free Claude + Gemini tokens + 1 Month NETFLIX, PRIME &amp; HOTSTAR, free on signup.
+    </div>
+
     <header class="topbar">
       <div class="wrap topbar-in">
         <a href="/" class="brand">
@@ -767,31 +715,62 @@
             <span class="brand-tag">PROPERTY MITRA</span>
           </span>
         </a>
-        <div class="topbar-offer">
-          <span class="live-dot"></span>
-          <span class="offer-label">1,00,000 free Claude + Gemini tokens for new signups</span>
-        </div>
       </div>
     </header>
 
     <main class="stage">
       <div class="stage-grid">
 
-        <!-- ── PITCH ─────────────────────────────────────────── -->
+        <!-- ── HERO 4-CARD ROW ───────────────────────────────────── -->
+        <div class="hero-cards-row">
+            
+          <!-- Card 1 -->
+          <div class="hcard hcard-green">
+            <div class="hcard-title-sm">TOKEN BOOST:</div>
+            <div class="hcard-title-lg">1,00,000 Free AI Tokens<br>(Claude &amp; Gemini)</div>
+            <div class="hcard-logos-text">Claude ✦ Gemini</div>
+          </div>
+          
+          <!-- Card 2 -->
+          <div class="hcard hcard-red">
+            <div class="badge-new">NEW</div>
+            <div class="hcard-logo-area">
+              <div class="n-logo-large">N</div>
+            </div>
+            <div class="hcard-title-sm">PREMIUM REWARD:</div>
+            <div class="hcard-title-lg">1 Month Free Netflix</div>
+            <div class="hcard-foot">Vouchers activate right after you register</div>
+          </div>
+          
+          <!-- Card 3 -->
+          <div class="hcard hcard-lblue">
+            <div class="hcard-logo-area">
+              <div style="font-weight:900; font-style:italic; font-size:1.05rem; color:#0f2b5a;">prime video</div>
+              <div style="margin-left:6px; font-weight:600; font-size:0.85rem; color:#0f2b5a; display:flex; align-items:center;">amazon prime</div>
+            </div>
+            <div class="hcard-title-sm">PREMIUM REWARD:</div>
+            <div class="hcard-title-lg">1 Month Free Prime Video</div>
+            <div class="hcard-foot">Vouchers activate right after you register</div>
+          </div>
+          
+          <!-- Card 4 -->
+          <div class="hcard hcard-dblue">
+            <div class="hcard-logo-area">
+              <div style="font-weight:700; font-size:1.15rem; color:#fff;">Disney+ hotstar</div>
+            </div>
+            <div class="hcard-title-sm">PREMIUM REWARD:</div>
+            <div class="hcard-title-lg">1 Month Free Disney+ Hotstar</div>
+            <div class="hcard-foot">Vouchers activate right after you register</div>
+          </div>
+          
+        </div>
+
+        <!-- ── LEFT: PITCH ───────────────────────────────────────── -->
         <div class="pitch">
 
-          <h2 class="value-h2">
-            Real Estate Valuations, Reimagined by AI
-          </h2>
-
-          <span class="offer-pill">
-            <span class="tag">LAUNCH OFFER</span>
-            1,00,000 free tokens on signup — Claude + Gemini included
-          </span>
-
           <h1 class="hero-h">
-            Stop guessing what a property is worth.
-            <span class="survey-underline">Ask Mitraya.</span>
+            Stop guessing what a property<br>
+            is worth. <span class="survey-underline">ASK MITRAYA.</span>
           </h1>
 
           <p class="hero-sub">
@@ -804,48 +783,32 @@
           <div class="coverage">
             <span>MUMBAI</span><span>BENGALURU</span><span>DELHI NCR</span>
             <span>PUNE</span><span>HYDERABAD</span><span>CHENNAI</span>
+            <span>AHMEDABAD</span><span>KOLKATA</span><span class="active-city">LUCKNOW</span>
+            <span>JAIPUR</span><span>CHANDIGARH</span><span>GOA</span>
             <span class="more">+ every major Indian city</span>
           </div>
 
           <ul class="hero-trust">
-            <li><span class="tick">✓</span> Instant AI valuations</li>
-            <li><span class="tick">✓</span> Real transaction data</li>
-            <li><span class="tick">✓</span> No card required</li>
+            <li><span class="tick">✓</span> Instant AI Valuations</li>
+            <li><span class="tick">✓</span> Real Transaction Data</li>
+            <li><span class="tick">✓</span> No Card Required</li>
           </ul>
 
-          <div class="token-card">
-            <div class="contour-rings" aria-hidden="true">
-              <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="100" cy="100" r="30" fill="none" stroke="#B8862E" stroke-width="1" />
-                <circle cx="100" cy="100" r="55" fill="none" stroke="#B8862E" stroke-width="1" />
-                <circle cx="100" cy="100" r="80" fill="none" stroke="#B8862E" stroke-width="1" />
-                <circle cx="100" cy="100" r="105" fill="none" stroke="#B8862E" stroke-width="1" />
-              </svg>
-            </div>
-            <div class="stamp">
-              <div class="stamp-txt">AI<br />VERIFIED</div>
-            </div>
-            <div class="token-copy">
-              <span class="num">1,00,000 <span class="models">Claude + Gemini</span> tokens</span>
-              <p><strong>Free on your account</strong> — run unlimited valuation and locality queries on both models, on
-                us.</p>
-            </div>
-          </div>
         </div>
 
-        <!-- ── FORM ──────────────────────────────────────────── -->
+        <!-- ── RIGHT: FORM CARD ──────────────────────────────────── -->
         <div class="form-card">
 
           <div class="timer-band">
             <div class="timer-band-l"><span class="live-dot"></span> Claim window for this visit</div>
-            <div class="timer-clock" id="offerTimer">05:00</div>
+            <div class="timer-clock" id="offerTimer">04:45</div>
           </div>
 
           <!-- STEP 1: REGISTRATION FORM -->
           <form id="regForm" novalidate>
             <div class="form-title">Create your free account</div>
             <div class="form-title-sub">Unlock 1,00,000 free <span class="models">Claude + Gemini</span> tokens
-              instantly — no payment details needed.</div>
+              instantly, plus <span class="netflix">1 month of Netflix, Prime &amp; Hotstar free</span> — no payment details needed.</div>
 
             <div class="field">
               <label for="full_name">Full Name</label>
@@ -870,11 +833,15 @@
               <input id="password" type="password" placeholder="••••••••" required autocomplete="new-password" />
               <span class="err" data-err="password">Password must be at least 6 characters.</span>
             </div>
+            
+            <div class="netflix-notice">
+              <span class="n-icon">N</span> <span>Your 1 Month Free Netflix, Prime &amp; Hotstar Vouchers activate after this step</span>
+            </div>
 
             <button id="submitRegBtn" type="submit" class="btn btn-solid btn-block">
-              Claim 1,00,000 Claude + Gemini tokens
+              Claim 1,00,000 tokens + Free OTTs
             </button>
-            <p class="form-fine">Includes Claude &amp; Gemini access. No credit card. Cancel anytime.</p>
+            <p class="form-fine">Includes Claude &amp; Gemini access + 1 month Netflix, Prime &amp; Hotstar vouchers. No credit card. Cancel anytime.</p>
           </form>
 
           <!-- STEP 2: OTP VERIFICATION -->
@@ -994,16 +961,6 @@
 
         const data = await res.json();
 
-        // if (res.status === 409) {
-        //   byId('regForm').style.display = 'none';
-        //   byId('dupeState').style.display = 'block';
-        //   if (data.redirectTo) {
-        //     setTimeout(() => window.location.href = data.redirectTo, 2500);
-        //   }
-        //   return;
-        // }
-
-
         if (res.status === 409) {
           byId('regForm').style.display = 'none';
           byId('dupeState').style.display = 'block';
@@ -1034,7 +991,7 @@
 
       } catch (err) {
         alert(err.message);
-        btn.disabled = false; btn.textContent = 'Claim 1,00,000 Claude + Gemini tokens';
+        btn.disabled = false; btn.textContent = 'Claim 1,00,000 tokens + Free OTTs';
       }
     });
 
@@ -1062,8 +1019,6 @@
 
         btn.textContent = 'Success! Redirecting…';
         btn.style.background = '#125F53';
-
-        // setTimeout(() => window.location.href = 'https://app.mitrayallm.com/', 1000);
 
         const userEmail = encodeURIComponent(pendingUser.email);
         setTimeout(() => {
@@ -1097,8 +1052,6 @@
           remaining = 0;
           render();
           el.textContent = 'Refreshing…';
-          // Soft-reset the window rather than pressuring with a hard cutoff —
-          // this is a rolling claim-window nudge, not a false scarcity deadline.
           setTimeout(() => { remaining = 5 * 60; render(); }, 1500);
           clearInterval(iv);
           startOfferTimer();
